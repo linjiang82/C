@@ -32,6 +32,18 @@ node_t * newNode(int val){
   return newnode;
 }
 
+bool isEmpty(node_t * head){
+  return head==NULL;
+}
+
+int size(node_t * head){
+  int count=0;
+  while(head){
+    count++;
+    head = head->next;
+  }
+  return count;
+}
 void addNode(node_t ** head, node_t * newnode){
  node_t **tracer = head;
  while(*tracer!=NULL && (*tracer)->value<newnode->value){
@@ -66,14 +78,17 @@ void removeNode(node_t **head, node_t * beRemoved){
 
  int main(int argc,char *argv[]){
     node_t * head=NULL;
+    printf("%s\n",isEmpty(head)?"True":"False");
     addNode(&head,newNode(1));
     addNode(&head,newNode(3));
     addNode(&head,newNode(2));
+    printf("%s\n",isEmpty(head)?"True":"False");
     addNode(&head,newNode(0));
     removeNode(&head,newNode(0));
     removeNode(&head,newNode(3));
     removeNode(&head,newNode(2));
     addNode(&head,newNode(4));
+    printf("%d\n",size(head));
     printList(head);
  }
 
