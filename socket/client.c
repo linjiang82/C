@@ -11,6 +11,9 @@ int main(int argc, char *argv[]){
   struct sockaddr_in address;
   int addlen = sizeof(address);
   char buffer[1024];
+  char cmd[256];
+
+  memset(cmd,0,256);
 
   //create socket
   if((sockfd=socket(AF_INET,SOCK_STREAM,0))<0){
@@ -28,9 +31,13 @@ int main(int argc, char *argv[]){
     perror("connection failed");
     exit(-1);
   }
-  send(sockfd,"hello from client",strlen("hello from client"),0);
-  printf("hello sent from client\n");
-  read(sockfd,buffer,1024);
-  printf("%s\n",buffer);
+  printf("Connected\n");
+  while(1){
+    scanf("%s",cmd);
+    send(sockfd,cmd,strlen(cmd),0);
+    printf("%s sent from client\n",cmd);
+    read(sockfd,buffer,1024);
+    printf("%s\n",buffer);
+  }
   return 1;
 }
