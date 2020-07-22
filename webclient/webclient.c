@@ -33,7 +33,7 @@ int main(int argc,char * argv[]){
   memset(&address,0,addlen);
   address.sin_family = AF_INET;
   address.sin_port = htons(PORT);
-  if(inet_pton(AF_INET,"172.217.25.164", &address.sin_addr)<0){
+  if(inet_pton(AF_INET,"23.202.166.50", &address.sin_addr)<0){
     perror("invalid address");
     exit(-1);
   }
