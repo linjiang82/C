@@ -18,11 +18,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include "mylib.h"
 
-typedef struct node{
- int value;
- struct node * next;
-} node_t;
+// typedef struct node{
+//  int value;
+//  struct node * next;
+// } node_t;
 
 
 node_t * newNode(int val){
@@ -52,7 +53,44 @@ void addNode(node_t ** head, node_t * newnode){
   newnode->next=*tracer;
   *tracer = newnode;
 } 
+void addToBegin(node_t ** head, node_t * newnode){
+ node_t **tracer = head;
+  newnode->next=*tracer;
+  *tracer = newnode;
+}
 
+void addToEnd(node_t ** head, node_t * newnode){
+ node_t **tracer = head;
+ while(*tracer!=NULL){
+   tracer=&(*tracer)->next;
+ }
+  newnode->next=*tracer;
+  *tracer = newnode;
+} 
+
+void removeFromBegin(node_t **head){
+  node_t ** tracer=head;
+  node_t *toBeFreed;
+     toBeFreed = *tracer;
+     *tracer = (*tracer)->next;
+     free(toBeFreed);
+     return;
+  }
+
+void removeFromEnd(node_t **head){
+  node_t ** tracer=head;
+  node_t *toBeFreed;
+  while(*tracer){
+    if((*tracer)->next==NULL){
+      toBeFreed = *tracer;
+      *tracer=NULL;
+      free(toBeFreed);
+    }
+    else {
+      tracer=&(*tracer)->next;
+    }
+  }
+  }
 void removeNode(node_t **head, node_t * beRemoved){
   node_t ** tracer=head;
   node_t *toBeFreed;
@@ -74,23 +112,24 @@ void removeNode(node_t **head, node_t * beRemoved){
      printf("%d-",(*tracer)->value);
      tracer = &(*tracer)->next;
    }
+   printf("\n");
  }
 
- int main(int argc,char *argv[]){
-    node_t * head=NULL;
-    printf("%s\n",isEmpty(head)?"True":"False");
-    addNode(&head,newNode(1));
-    addNode(&head,newNode(3));
-    addNode(&head,newNode(2));
-    printf("%s\n",isEmpty(head)?"True":"False");
-    addNode(&head,newNode(0));
-    removeNode(&head,newNode(0));
-    removeNode(&head,newNode(3));
-    removeNode(&head,newNode(2));
-    addNode(&head,newNode(4));
-    printf("%d\n",size(head));
-    printList(head);
- }
+//  int main(int argc,char *argv[]){
+//     node_t * head=NULL;
+//     printf("%s\n",isEmpty(head)?"True":"False");
+//     addNode(&head,newNode(1));
+//     addNode(&head,newNode(3));
+//     addNode(&head,newNode(2));
+//     printf("%s\n",isEmpty(head)?"True":"False");
+//     addNode(&head,newNode(0));
+//     removeNode(&head,newNode(0));
+//     removeNode(&head,newNode(3));
+//     removeNode(&head,newNode(2));
+//     addNode(&head,newNode(4));
+//     printf("%d\n",size(head));
+//     printList(head);
+//  }
 
 
 // //have to use **, due to c only pass arguments by value;
