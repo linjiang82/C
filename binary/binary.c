@@ -15,7 +15,8 @@ int main(int argc, char* argv[]){
     printf("Usage: binary 1st");
     exit(-1);
   }
-  binary(strtol(argv[1],NULL,10));
+  printf("%ul",strtoul(argv[1],NULL,10));
+  binary(strtoul(argv[1],NULL,10));
   for(;idx>0;){
     printf("%d",rval[--idx]);
   }
