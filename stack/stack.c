@@ -1,49 +1,40 @@
-/*
- * =====================================================================================
- *
- *       Filename:  stack.c
- *
- *    Description:  
- *
- *        Version:  1.0
- *        Created:  19/07/20 
- *       Revision:  none
- *       Compiler:  gcc
- *
- *         Author:  John Lin 
- *   Organization:  
- *
- * =====================================================================================
- */
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
 #include "../linkedList/mylib.h"
 
-void push(node_t **head, node_t * newnode)
+void push(node_t **head, node_t * newnode){
   addToEnd(head,newnode);
 }
-void pop(node_t **head){
-  removeFromEnd(head);
+
+int pop(node_t **head){
+  return removeFromEnd(head);
 }
- int main(int argc,char *argv[]){
-    node_t * stack=NULL;
-    push(&stack,newNode(1));
-    printList(stack);
-    push(&stack,newNode(3));
-    printList(stack);
-    push(&stack,newNode(2));
-    printList(stack);
-    push(&stack,newNode(0));
-    printList(stack);
-    pop(&stack);
-    printList(stack);
-    pop(&stack);
-    printList(stack);
-    pop(&stack);
-    printList(stack);
-    push(&stack,newNode(4));
-    printList(stack);
+
+int main(int argc,char *argv[]){
+    node_t * operand=NULL;
+    node_t * operator=NULL;
+    node_t * bracket=NULL;
+    for(int i=0;argv[1][i]!='\0';i++){
+      if(argv[1][i]>='0' && argv[1][i]<='9'){
+        push(&operand,newNode((int)argv[1][i]));
+      }
+      else if(argv[1][i]=='+' ||argv[1][i]=='-' ||argv[1][i]=='*' ||argv[1][i]=='/' ){
+        push(&operator,newNode((int)argv[1][i]));
+      }
+      else if(argv[1][i]=='('){
+        push(&bracket,newNode((int)argv[1][i]));
+      }
+      else if(argv[1][i]==')'){
+        if((char) pop(&bracket)!='('){
+          return -1;
+        }
+      }
+      printf("%c\n", argv[1][i]);
+    } 
+      printList(operand);
+      printList(operator);
+      printList(bracket);
  }
 
 
