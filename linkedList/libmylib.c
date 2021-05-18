@@ -25,7 +25,7 @@
 //  struct node * next;
 // } node_t;
 
-
+int rval;
 node_t * newNode(int val){
   node_t *newnode = (node_t *)malloc(sizeof(node_t));
   newnode->value=val;
@@ -68,21 +68,23 @@ void addToEnd(node_t ** head, node_t * newnode){
   *tracer = newnode;
 } 
 
-void removeFromBegin(node_t **head){
+int removeFromBegin(node_t **head){
   node_t ** tracer=head;
   node_t *toBeFreed;
      toBeFreed = *tracer;
+     rval = toBeFreed->value;
      *tracer = (*tracer)->next;
      free(toBeFreed);
-     return;
+     return rval;
   }
 
-void removeFromEnd(node_t **head){
+int removeFromEnd(node_t **head){
   node_t ** tracer=head;
   node_t *toBeFreed;
   while(*tracer){
     if((*tracer)->next==NULL){
       toBeFreed = *tracer;
+      rval = toBeFreed->value;
       *tracer=NULL;
       free(toBeFreed);
     }
@@ -90,16 +92,18 @@ void removeFromEnd(node_t **head){
       tracer=&(*tracer)->next;
     }
   }
+  return rval;
   }
-void removeNode(node_t **head, node_t * beRemoved){
+int removeNode(node_t **head, node_t * beRemoved){
   node_t ** tracer=head;
   node_t *toBeFreed;
   while(*tracer){
    if((*tracer)->value==beRemoved->value){
      toBeFreed = *tracer;
+     rval = toBeFreed->value;
      *tracer = (*tracer)->next;
      free(toBeFreed);
-     return;
+     return rval;
    }
    tracer=&(*tracer)->next;
 

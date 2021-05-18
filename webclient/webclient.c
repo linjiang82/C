@@ -33,7 +33,8 @@ int main(int argc,char * argv[]){
   memset(&address,0,addlen);
   address.sin_family = AF_INET;
   address.sin_port = htons(PORT);
-  if(inet_pton(AF_INET,"23.202.166.50", &address.sin_addr)<0){
+ int a = inet_pton(AF_INET,"172.217.167.110", &(address.sin_addr));
+  if(a<0){
     perror("invalid address");
     exit(-1);
   }
@@ -48,7 +49,7 @@ int main(int argc,char * argv[]){
     exit(-1);
   }
   memset(rval,0,MAXLINE);
-  while((n=read(sockfd,rval,MAXLINE-1))>0){
+  if((n=read(sockfd,rval,MAXLINE-1))>0){
     printf("%s",rval);
   }
   if(n<0){

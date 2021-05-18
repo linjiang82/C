@@ -14,9 +14,9 @@ int size(node_t * head);
 void addNode(node_t ** head, node_t * newnode); 
 void addToBegin(node_t ** head, node_t * newnode); 
 void addToEnd(node_t ** head, node_t * newnode); 
-void removeNode(node_t **head, node_t * beRemoved);
-void removeFromBegin(node_t **head);
-void removeFromEnd(node_t **head);
+int removeNode(node_t **head, node_t * beRemoved);
+int removeFromBegin(node_t **head);
+int removeFromEnd(node_t **head);
 void printList(node_t *head);
 
 #endif

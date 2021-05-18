@@ -5,7 +5,7 @@ BIN = server client
 all:$(BIN)
 
 %: %.c
-	$(CC) -o $@ $^
+	$(CC) -g -o $@ $^
 
 clean:
 	rm -rf $(BIN)
