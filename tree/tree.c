@@ -46,9 +46,23 @@ void nlr(node *head) {
   }
 }
 
+bool isSymmentryHelper(node *left, node *right) {
+  if (left == NULL && right == NULL) {
+    return true;
+  } else if (left != NULL && right != NULL && left->val == right->val) {
+    return isSymmentryHelper(left->right, right->left) &&
+           isSymmentryHelper(left->left, right->right);
+  } else {
+    return false;
+  }
+}
 bool isSymmentry(node *head) {
   if (head == NULL) {
     return true;
+  } else {
+    node *left = head->left;
+    node *right = head->right;
+    return isSymmentryHelper(left, right);
   }
 }
 
@@ -58,11 +72,11 @@ int main(int argc, char *argv[]) {
   node *n2 = newNode(5);
   node *n3 = newNode(6);
   node *n4 = newNode(8);
-  node *n5 = newNode(10);
+  node *n5 = newNode(9);
   n1->left = n2;
-  n2->left = n3;
-  n2->right = n4;
-  n1->right = n5;
+  n1->right = n3;
+  n2->left = n4;
+  n3->right = n5;
   head = n1;
 
   nlr(head);
@@ -70,6 +84,8 @@ int main(int argc, char *argv[]) {
   lnr(head);
   printf("\n");
   lrn(head);
+
+  printf("the result: %d\n", isSymmentry(head));
 
   free(n1);
   free(n2);
