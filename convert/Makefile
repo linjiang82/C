@@ -5,7 +5,7 @@ BIN=convert
 ALL:$(BIN)
 
 %:%.c
-	$(CC) -o $@ $^
+	$(CC) -o $@ $^ -lm
 
 clean:
 	rm -rf $(BIN)
