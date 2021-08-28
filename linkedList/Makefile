@@ -1,20 +1,16 @@
 CC=gcc
 
-BIN=libmylib.so test runtime_test
+CFLAG=-g -Wall
 
-all:$(BIN) 
+BIN=demo liblinkedList.so
 
-%.o:%.c mylib.h
-	$(CC) -c $^
+all=$(BIN)
 
-%.so:%.c mylib.h
-	$(CC) -fPIC -shared -o $@ $^ -lc
+demo: demo.c liblinkedList.so
+	$(CC) $(CFLAG) -L. -o $@ $^
 
-test:test.c libmylib.o
-	$(CC) -o $@ $^
-
-runtime_test: test.c
-	$(CC) -o $@ $^ -L. -lmylib
+liblinkedList.so: linkedList.c 
+	$(CC) $(CFLAG) -fPIC -shared -o $@ $^
 
 clean:
 	rm -rf $(BIN)
