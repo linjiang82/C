@@ -187,6 +187,7 @@ int main(int argc, char *argv[]) {
     }
   }
   endwin();
+  free(Snake.coor);
 
   return 0;
 }
